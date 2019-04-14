@@ -1,0 +1,4 @@
+name: Sarcandra
+version: @version@
+depend: [Arabidopsis]
+main: life.grass.sarcandra.Sarcandra
