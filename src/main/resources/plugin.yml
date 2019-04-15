@@ -2,3 +2,14 @@ name: Sarcandra
 version: @version@
 depend: [Arabidopsis]
 main: life.grass.sarcandra.Sarcandra
+commands:
+  guild:
+    description: Sarcandra commands of guild.
+    usage: /guild [init/disband/invite/confirm/leave]
+    permission: sarcandra.guild
+    permission-message: sorry, you do not have permission to do.
+permissions:
+  sarcandra.*:
+    default: op
+  sarcandra.guild:
+    default: true
