@@ -7,7 +7,7 @@ class Sarcandra : JavaPlugin() {
 
     override fun onEnable() {
         super.onEnable()
-        getCommand("sarcandra-guild")?.setExecutor(GuildCommandExecutor(GuildContainer(mutableSetOf())))
+        getCommand("guild")?.setExecutor(GuildCommandExecutor(GuildContainer()))
     }
 
 }

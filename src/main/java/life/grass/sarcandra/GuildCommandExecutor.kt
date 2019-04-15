@@ -4,30 +4,33 @@ import guild.GuildContainer
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
+import org.bukkit.entity.Player
 
-class GuildCommandExecutor(val guildContainer: GuildContainer) : CommandExecutor {
+class GuildCommandExecutor(private val guildContainer: GuildContainer) : CommandExecutor {
 
     public override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (args.isEmpty()) return false
-        val senderPlayer = sender.server.getPlayer(sender.name)
-        return when (args[0].toUpperCase()) {
+        val senderPlayer = sender as? Player ?: return false
+        when (args[0].toUpperCase()) {
             "INIT" -> {
-                guildContainer.createGuild(senderPlayer?.uniqueId, args[1])
-                true
+                if (args[1].isNullOrBlank()) {
+                    guildContainer.createGuild(senderPlayer.uniqueId, args[1])
+                }
             }
-            "DISSOLVE" -> {
-                guildContainer.destroyGuild(senderPlayer?.uniqueId)
-                true
+            "DISBAND" -> {
+                guildContainer.destroyGuild(senderPlayer.uniqueId)
             }
             "INVITE" -> {
                 println("invite")
-                true
             }
             "CONFIRM" -> {
                 println("confirm")
-                true
             }
-            else -> false
+            "LEAVE" -> {
+                println("leave")
+            }
+            else -> return@onCommand false
         }
+        return true
     }
 }
